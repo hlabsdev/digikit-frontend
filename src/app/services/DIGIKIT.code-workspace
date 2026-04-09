@@ -10,5 +10,7 @@
 			"path": "../../../../agents"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.defaultInterpreterPath": "C:\\PROJETS\\CLIENTS\\DIGIKIT\\venv\\Scripts\\python.exe"
+	}
 }

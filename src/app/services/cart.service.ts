@@ -33,8 +33,25 @@ export class CartService {
     this.saveCart();
   }
 
+  updateQuantity(index: number, quantity: number) {
+    if (quantity > 0) {
+      this.items[index].quantity = quantity;
+      this.saveCart();
+    }
+  }
+
+  removeItem(index: number) {
+    this.items.splice(index, 1);
+    this.saveCart();
+  }
+
   getCartTotal() {
     return this.items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+  }
+
+  clearCart() {
+    this.items = [];
+    this.saveCart();
   }
 
   private saveCart() {

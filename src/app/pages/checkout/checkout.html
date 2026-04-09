@@ -1,1 +1,74 @@
-<p>checkout works!</p>
+<div class="container checkout-page">
+  <h1 class="page-title">Finaliser la Commande</h1>
+  
+  <div class="checkout-layout">
+    <!-- Form -->
+    <div class="checkout-form glass-panel">
+      <h2>Vos Coordonnées</h2>
+      <p class="subtitle">Vos informations pour la livraison ou le téléchargement.</p>
+      
+      <form (ngSubmit)="processCheckout()">
+        <div class="form-group">
+          <label>Nom complet *</label>
+          <input type="text" [(ngModel)]="customerName" name="name" required placeholder="Ex: Hermann Kekeli">
+        </div>
+        
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" [(ngModel)]="customerEmail" name="email" required placeholder="Pour recevoir vos produits numériques">
+        </div>
+        
+        <div class="form-group">
+          <label>Numéro de téléphone *</label>
+          <input type="tel" [(ngModel)]="customerPhone" name="phone" required placeholder="Nécessaire pour le paiement (Tmoney/Flooz)">
+        </div>
+
+        <button type="submit" class="btn-primary w-100 mt-4" [disabled]="cartItems.length === 0">Payer via Moneroo</button>
+      </form>
+      
+      <div class="secure-info">
+        <span>🔒</span> Transactions sécurisées et cryptées - Aucune création de compte requise.
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary glass-panel">
+      <h2>Votre Panier</h2>
+      
+      <div class="empty-cart" *ngIf="cartItems.length === 0">
+        <p>Votre panier est vide.</p>
+        <button class="btn-outline" routerLink="/products">Retour à la boutique</button>
+      </div>
+
+      <div class="cart-items" *ngIf="cartItems.length > 0">
+        <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+          <img [src]="item.product.image" [alt]="item.product.title">
+          <div class="item-details">
+            <h4>{{item.product.title}}</h4>
+            <div class="item-price-qty">
+              <span>${{item.product.price}}</span> x 
+              <div class="qty-control">
+                <button type="button" (click)="updateQuantity(i, -1)">-</button>
+                <span>{{item.quantity}}</span>
+                <button type="button" (click)="updateQuantity(i, 1)">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="remove-btn" (click)="removeItem(i)">✕</button>
+        </div>
+      </div>
+
+      <div class="summary-totals" *ngIf="cartItems.length > 0">
+        <div class="total-row">
+          <span>Sous-total</span>
+          <span>${{totalAmount.toFixed(2)}}</span>
+        </div>
+        <div class="total-row grand-total">
+          <span>Total</span>
+          <span>${{totalAmount.toFixed(2)}}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

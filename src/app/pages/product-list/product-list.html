@@ -1,0 +1,30 @@
+<div class="container products-page">
+  <div class="page-header text-center">
+    <h2>Nos Produits</h2>
+    <p>Parcourez notre catalogue complet de produits numériques et physiques</p>
+  </div>
+  
+  <div class="filters-bar">
+    <button class="btn-outline active">Tous</button>
+    <button class="btn-outline">Numériques</button>
+    <button class="btn-outline">Physiques</button>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card glass-panel" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+      <div class="badges">
+        <span class="badge new" *ngIf="product.isNew">Nouveau</span>
+        <span class="badge digital" *ngIf="product.type === 'Digital'">Numérique</span>
+      </div>
+      <img [src]="product.image" [alt]="product.title">
+      <div class="product-info">
+        <h3>{{product.title}}</h3>
+        <p class="category">{{product.category}}</p>
+        <div class="price-row">
+          <span class="price">${{product.price}}</span>
+          <button class="add-to-cart" (click)="addToCart($event, product)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,36 @@
-<p>footer works!</p>
+<footer class="main-footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <img src="/assets/logo%20premium.png" alt="DIGIKIT Logo" class="footer-logo">
+      <p>Votre boutique premium pour des produits digitaux et physiques de haute qualité. Simple, rapide et sécurisé.</p>
+    </div>
+    
+    <div class="footer-links">
+      <h4>Catégories</h4>
+      <a routerLink="/products" [queryParams]="{type: 'digital'}">Produits Numériques</a>
+      <a routerLink="/products" [queryParams]="{type: 'physical'}">Produits Physiques</a>
+      <a routerLink="/products">Nouveautés</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Légal & Support</h4>
+      <a href="mailto:kekeligolo@gmail.com">Contactez-nous</a>
+      <a href="#">Conditions de vente</a>
+      <a href="#">Politique de confidentialité</a>
+    </div>
+
+    <div class="footer-payment">
+      <h4>Paiement Sécurisé</h4>
+      <div class="payment-methods">
+        <span>Tmoney</span>
+        <span>Flooz</span>
+        <span>Visa</span>
+        <span>Mastercard</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom text-center">
+    <p>&copy; 2026 DIGIKIT. Tous droits réservés.</p>
+  </div>
+</footer>

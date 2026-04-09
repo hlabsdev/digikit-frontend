@@ -1,1 +1,54 @@
-<p>product-detail works!</p>
+<div class="container product-detail-page" *ngIf="product">
+  <div class="breadcrumb">
+    <a routerLink="/">Home</a> > <a routerLink="/products">Products</a> > <span>{{product.title}}</span>
+  </div>
+
+  <div class="product-layout glass-panel">
+    <div class="product-image">
+      <span class="badge digital" *ngIf="product.type === 'Digital'">Numérique</span>
+      <span class="badge new" *ngIf="product.isNew">Nouveau</span>
+      <img [src]="product.image" [alt]="product.title">
+    </div>
+    
+    <div class="product-info">
+      <p class="category">{{product.category}}</p>
+      <h1>{{product.title}}</h1>
+      <p class="description">Profitez d'un produit conçu avec une qualité exceptionnelle. Adapté à tous vos besoins professionnels et personnels. Obtenez un accès instantané et sécurisé.</p>
+      
+      <div class="price-section">
+        <span class="price">${{product.price}}</span>
+      </div>
+
+      <div class="benefits">
+        <ul>
+          <li>✔️ Qualité Premium Garantie</li>
+          <li>✔️ Support Client 7j/7</li>
+          <li>
+            <span *ngIf="product.type === 'Digital'">✔️ Téléchargement Instantané</span>
+            <span *ngIf="product.type === 'Physical'">✔️ Livraison Rapide</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="action-section">
+        <div class="quantity-picker">
+          <button (click)="quantity = quantity > 1 ? quantity - 1 : 1">-</button>
+          <span>{{quantity}}</span>
+          <button (click)="quantity = quantity + 1">+</button>
+        </div>
+        <button class="btn-primary add-btn" (click)="addToCart()">🛒 Ajouter au Panier</button>
+      </div>
+
+      <div class="trust-badges">
+        <div class="trust-item">
+          <span>📦</span>
+          <p *ngIf="product.type === 'Digital'">Livraison par e-mail</p>
+          <p *ngIf="product.type === 'Physical'">Livraison en 24h</p>
+        </div>
+        <div class="trust-item">
+          <span>🔒</span> <p>Paiement Sécurisé Flooz/Tmoney</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
