@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../digikit_backend"
+		},
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../agents"
+		}
+	],
+	"settings": {}
+}
