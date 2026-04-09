@@ -1,0 +1,37 @@
+<div class="home-container">
+  <!-- HERO SECTION -->
+  <section class="hero-section text-center">
+    <h1>Your Marketplace for <br> <span class="highlight">Digital</span> & <span class="highlight-alt">Physical</span> Products</h1>
+    <p class="hero-subtitle">Discover premium digital tools, e-books, and physical products. Fast, secure, and reliable shopping experience.</p>
+    
+    <div class="hero-buttons">
+      <button class="btn-primary" routerLink="/products">Browse Products →</button>
+      <button class="btn-outline" routerLink="/products" [queryParams]="{type: 'digital'}">Digital Products</button>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section container">
+    <div class="feature-card glass-panel">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-text">
+        <h4>Instant Delivery</h4>
+        <p>Digital products delivered instantly to your inbox</p>
+      </div>
+    </div>
+    <div class="feature-card glass-panel">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-text">
+        <h4>Secure Payments</h4>
+        <p>Your transactions are protected with encryption</p>
+      </div>
+    </div>
+    <div class="feature-card glass-panel">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-text">
+        <h4>Fast Shipping</h4>
+        <p>Physical products shipped within 24 hours</p>
+      </div>
+    </div>
+  </section>
+</div>
