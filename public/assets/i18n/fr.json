@@ -64,5 +64,16 @@
       "H24_DELIVERY": "Livraison en 24h",
       "SECURE_PAYMENT": "Paiement Sécurisé Flooz/Tmoney"
     }
+  },
+  "NAV": {
+    "HOME": "Accueil",
+    "PRODUCTS": "Produits",
+    "ABOUT": "À propos"
+  },
+  "ABOUT": {
+    "TITLE": "À propos de DIGIKIT",
+    "DESCRIPTION": "Votre destination premium pour les produits numériques et physiques de haute qualité.",
+    "MISSION_TITLE": "Notre Mission",
+    "MISSION_TEXT": "Fournir une plateforme sécurisée et intuitive permettant à chacun d'accéder aux meilleurs outils et ressources, avec une livraison instantanée pour le digital et une logistique rapide pour le physique."
   }
 }
