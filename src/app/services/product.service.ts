@@ -20,4 +20,16 @@ export class ProductService {
   getCategories(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/categories/`);
   }
+
+  getFeaturedProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/products/featured/`);
+  }
+
+  getLatestProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/products/latest/`);
+  }
+
+  getTopSellingProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/products/top_selling/`);
+  }
 }

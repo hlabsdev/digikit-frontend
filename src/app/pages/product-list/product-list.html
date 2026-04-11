@@ -1,7 +1,7 @@
 <div class="container products-page">
   <div class="page-header text-center">
-    <h2>Nos Produits</h2>
-    <p>Parcourez notre catalogue complet de produits numériques et physiques</p>
+    <h2>{{ 'PRODUCT_LIST.TITLE' | translate }}</h2>
+    <p>{{ 'PRODUCT_LIST.SUBTITLE' | translate }}</p>
   </div>
 
   <div class="products-layout">
@@ -51,7 +51,7 @@
       <div class="toolbar glass-panel">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" placeholder="Rechercher un produit..." [(ngModel)]="searchQuery">
+          <input type="text" [placeholder]="'PRODUCT_LIST.SEARCH_PLACEHOLDER' | translate" [(ngModel)]="searchQuery">
         </div>
 
         <div class="toolbar-actions">
@@ -83,10 +83,10 @@
         <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
           <div class="badges">
             @if (product.is_featured) {
-            <span class="badge featured">🌟 Phare</span>
+            <span class="badge featured">{{ 'PRODUCT_LIST.PHARE_BADGE' | translate }}</span>
             }
             @if (product.product_type === 'DIGITAL') {
-            <span class="badge digital">Numérique</span>
+            <span class="badge digital">{{ 'PRODUCT_LIST.DIGITAL_BADGE' | translate }}</span>
             }
           </div>
           <img [src]="product.image" [alt]="product.title">
@@ -99,21 +99,20 @@
             <div class="card-actions" style="display: flex; flex-direction: column; gap: 10px;">
               <button class="btn-outline" (click)="buyDirect($event, product)"
                 style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
-                <span class="material-symbols-outlined">bolt</span> Achat direct
+                <span class="material-symbols-outlined">bolt</span> {{ 'PRODUCT_LIST.DIRECT_BUY' | translate }}
               </button>
               <button class="btn-primary" (click)="addToCart($event, product)"
                 style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
-                <span class="material-symbols-outlined">shopping_cart</span> Ajouter au Panier
+                <span class="material-symbols-outlined">shopping_cart</span> {{ 'PRODUCT_LIST.ADD_TO_CART' | translate }}
               </button>
             </div>
           </div>
         </div>
         } @empty {
         <div class="empty-state glass-panel">
-          <p>Aucun produit ne correspond à vos critères.</p>
+          <p>{{ 'PRODUCT_LIST.NO_RESULTS' | translate }}</p>
           <button class="btn-outline"
-            (click)="searchQuery=''; digitalOnly=false; physicalOnly=false; selectedCategories.clear()">Réinitialiser
-            les filtres</button>
+            (click)="searchQuery=''; digitalOnly=false; physicalOnly=false; selectedCategories.clear()">{{ 'PRODUCT_LIST.RESET_FILTERS' | translate }}</button>
         </div>
         }
       </div>

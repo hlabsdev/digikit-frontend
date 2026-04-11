@@ -16,10 +16,15 @@ export class CartService {
   public cart$ = this.cartSubject.asObservable();
 
   constructor() {
-    const savedCart = sessionStorage.getItem('digikit_cart');
-    if (savedCart) {
-      this.items = JSON.parse(savedCart);
-      this.cartSubject.next(this.items);
+    try {
+      const savedCart = localStorage.getItem('digikit_cart');
+      if (savedCart) {
+        this.items = JSON.parse(savedCart);
+        this.cartSubject.next(this.items);
+      }
+    } catch (e) {
+      console.error('Failed to load cart from storage', e);
+      this.items = [];
     }
   }
 
@@ -55,7 +60,7 @@ export class CartService {
   }
 
   private saveCart() {
-    sessionStorage.setItem('digikit_cart', JSON.stringify(this.items));
+    localStorage.setItem('digikit_cart', JSON.stringify(this.items));
     this.cartSubject.next(this.items);
   }
 }

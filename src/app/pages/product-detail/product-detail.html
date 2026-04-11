@@ -1,11 +1,11 @@
 <div class="container product-detail-page" *ngIf="product">
   <div class="breadcrumb">
-    <a routerLink="/">Home</a> > <a routerLink="/products">Products</a> > <span>{{product.title}}</span>
+    <a routerLink="/">{{ 'PRODUCT_DETAIL.HOME' | translate }}</a> > <a routerLink="/products">{{ 'PRODUCT_DETAIL.PRODUCTS' | translate }}</a> > <span>{{product.title}}</span>
   </div>
 
   <div class="product-layout glass-panel">
     <div class="product-image">
-      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">Numérique</span>
+      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_DETAIL.NUMERIQUE' | translate }}</span>
       <img [src]="mainImage || product.image" [alt]="product.title" class="main-img">
       
       <!-- Galerie d'images -->
@@ -27,16 +27,16 @@
       <div class="description html-content" [innerHTML]="product.description"></div>
 
       <div class="price-section">
-        <span class="price">{{product.price}} FCFA</span>
+        <span class="price">{{product.price}} {{ 'PRODUCT_DETAIL.PRICE_UNIT' | translate }}</span>
       </div>
 
       <div class="benefits">
         <ul>
-          <li>✔️ Qualité Premium Garantie</li>
-          <li>✔️ Support Client 7j/7</li>
+          <li>✔️ {{ 'PRODUCT_DETAIL.BENEFITS.GUARANTEE' | translate }}</li>
+          <li>✔️ {{ 'PRODUCT_DETAIL.BENEFITS.SUPPORT' | translate }}</li>
           <li>
-            <span *ngIf="product.product_type === 'DIGITAL'">✔️ Téléchargement Instantané</span>
-            <span *ngIf="product.product_type === 'PHYSICAL'">✔️ Livraison Rapide</span>
+            <span *ngIf="product.product_type === 'DIGITAL'">✔️ {{ 'PRODUCT_DETAIL.BENEFITS.INSTANT_DOWNLOAD' | translate }}</span>
+            <span *ngIf="product.product_type === 'PHYSICAL'">✔️ {{ 'PRODUCT_DETAIL.BENEFITS.FAST_DELIVERY' | translate }}</span>
           </li>
         </ul>
       </div>
@@ -49,10 +49,10 @@
         </div>
         <div class="buttons-group">
           <button class="btn-outline" (click)="buyDirect()">
-            <span class="material-symbols-outlined icon-small">bolt</span> Achat direct
+            <span class="material-symbols-outlined icon-small">bolt</span> {{ 'PRODUCT_DETAIL.DIRECT_BUY' | translate }}
           </button>
           <button class="btn-primary" (click)="addToCart()">
-            <span class="material-symbols-outlined icon-small">shopping_cart</span> Ajouter au Panier
+            <span class="material-symbols-outlined icon-small">shopping_cart</span> {{ 'PRODUCT_DETAIL.ADD_TO_CART' | translate }}
           </button>
         </div>
       </div>
@@ -60,12 +60,12 @@
       <div class="trust-badges">
         <div class="trust-item">
           <span>📦</span>
-          <p *ngIf="product.product_type === 'DIGITAL'">Livraison par e-mail</p>
-          <p *ngIf="product.product_type === 'PHYSICAL'">Livraison en 24h</p>
+          <p *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_DETAIL.TRUST.EMAIL_DELIVERY' | translate }}</p>
+          <p *ngIf="product.product_type === 'PHYSICAL'">{{ 'PRODUCT_DETAIL.TRUST.H24_DELIVERY' | translate }}</p>
         </div>
         <div class="trust-item">
           <span>🔒</span>
-          <p>Paiement Sécurisé Flooz/Tmoney</p>
+          <p>{{ 'PRODUCT_DETAIL.TRUST.SECURE_PAYMENT' | translate }}</p>
         </div>
       </div>
     </div>

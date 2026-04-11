@@ -5,23 +5,58 @@
     </div>
     
     <nav class="main-nav">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a routerLink="/products" routerLinkActive="active">Products</a>
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'PRODUCT_DETAIL.HOME' | translate }}</a>
+      <a routerLink="/products" routerLinkActive="active">{{ 'PRODUCT_DETAIL.PRODUCTS' | translate }}</a>
     </nav>
     
     <div class="header-actions">
       <div class="search-bar">
-        <input type="text" placeholder="Search products...">
+        <input type="text" [placeholder]="'PRODUCT_LIST.SEARCH_PLACEHOLDER' | translate">
       </div>
-      <a routerLink="/checkout" class="cart-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="9" cy="21" r="1"></circle>
-          <circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-        <span class="cart-badge" *ngIf="cartItemCount > 0">{{cartItemCount}}</span>
-      </a>
+      
+      <div class="cart-container">
+        <a routerLink="/checkout" class="cart-icon">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span class="cart-badge" *ngIf="cartItemCount > 0">{{cartItemCount}}</span>
+        </a>
+
+        <!-- Mini Cart Dropdown -->
+        <div class="cart-dropdown glass-panel">
+          <div class="cart-header">
+            <span>{{ 'CART.TITLE' | translate }}</span>
+            <span class="item-count">{{cartItemCount}} items</span>
+          </div>
+
+          <div class="cart-items-list" *ngIf="cartItems.length > 0">
+            @for (item of cartItems; track item.id; let i = $index) {
+              <div class="mini-cart-item">
+                <img [src]="item.product.image" [alt]="item.product.title">
+                <div class="item-details">
+                  <p class="item-name">{{item.product.title}}</p>
+                  <p class="item-price">{{item.quantity}} x {{item.product.price}} FCFA</p>
+                </div>
+                <button class="remove-btn" (click)="removeItem(i, $event)">
+                  <span class="material-symbols-outlined">close</span>
+                </button>
+              </div>
+            }
+          </div>
+
+          <div class="cart-empty" *ngIf="cartItems.length === 0">
+            <p>{{ 'CART.EMPTY' | translate }}</p>
+          </div>
+
+          <div class="cart-footer" *ngIf="cartItems.length > 0">
+            <div class="cart-subtotal">
+              <span>{{ 'CART.TOTAL' | translate }}</span>
+              <span>{{ cartService.getCartTotal() }} FCFA</span>
+            </div>
+            <button class="btn-primary checkout-btn" routerLink="/checkout">
+              {{ 'CART.VIEW_CART' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </header>

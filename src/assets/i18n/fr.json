@@ -1,0 +1,68 @@
+{
+  "HOME": {
+    "HERO": {
+      "TITLE": "Découvrez le meilleur du Digital",
+      "SUBTITLE": "Des produits premium pour booster vos projets, accessibles en un clic.",
+      "CTA": "Voir le catalogue"
+    },
+    "SECTIONS": {
+      "FEATURED": "✨ À la Une",
+      "TOP_SELLING": "🔥 Meilleures Ventes",
+      "LATEST": "💎 Nouveautés Limitées"
+    }
+  },
+  "CART": {
+    "TITLE": "Votre Panier",
+    "EMPTY": "Votre panier est vide.",
+    "TOTAL": "Total",
+    "VIEW_CART": "Commander",
+    "CLEAR": "Vider"
+  },
+  "CHECKOUT_SUCCESS": {
+    "TITLE": "Commande Réussie !",
+    "ORDER_NO": "Commande",
+    "MESSAGE_BODY": "Merci pour votre confiance. Un email de confirmation contenant vos liens de téléchargement sécurisés vient de vous être envoyé. Pensez à vérifier vos courriers indésirables !",
+    "BACK_HOME": "Retour à l'accueil"
+  },
+  "ORDER": {
+    "DETAIL_TITLE": "Détails de la commande",
+    "STATUS": "Statut",
+    "DATE": "Date",
+    "TOTAL": "Total",
+    "ITEMS": "Articles commandés",
+    "DOWNLOADS": "Vos téléchargements",
+    "REMAINING": "Essais restants",
+    "DOWNLOAD_NOW": "Télécharger",
+    "ERROR_TITLE": "Oups !"
+  },
+  "PRODUCT_LIST": {
+    "TITLE": "Nos Produits",
+    "SUBTITLE": "Parcourez notre catalogue complet de produits numériques et physiques",
+    "SEARCH_PLACEHOLDER": "Rechercher un produit...",
+    "PHARE_BADGE": "🌟 Phare",
+    "DIGITAL_BADGE": "Numérique",
+    "DIRECT_BUY": "Achat direct",
+    "ADD_TO_CART": "Ajouter au Panier",
+    "NO_RESULTS": "Aucun produit ne correspond à vos critères.",
+    "RESET_FILTERS": "Réinitialiser les filtres"
+  },
+  "PRODUCT_DETAIL": {
+    "HOME": "Accueil",
+    "PRODUCTS": "Produits",
+    "NUMERIQUE": "Numérique",
+    "PRICE_UNIT": "FCFA",
+    "BENEFITS": {
+      "GUARANTEE": "Qualité Premium Garantie",
+      "SUPPORT": "Support Client 7j/7",
+      "INSTANT_DOWNLOAD": "Téléchargement Instantané",
+      "FAST_DELIVERY": "Livraison Rapide"
+    },
+    "DIRECT_BUY": "Achat direct",
+    "ADD_TO_CART": "Ajouter au Panier",
+    "TRUST": {
+      "EMAIL_DELIVERY": "Livraison par e-mail",
+      "H24_DELIVERY": "Livraison en 24h",
+      "SECURE_PAYMENT": "Paiement Sécurisé Flooz/Tmoney"
+    }
+  }
+}
