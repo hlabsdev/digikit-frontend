@@ -13,7 +13,9 @@
       <div class="floating-card glass-panel" *ngIf="featuredProducts[0]">
         <img [src]="featuredProducts[0].image" [alt]="featuredProducts[0].title">
         <div class="floating-info">
-          <span class="badge featured">{{ 'PRODUCT_LIST.PHARE_BADGE' | translate }}</span>
+          <div class="badges">
+            <span class="badge featured">{{ 'PRODUCT_LIST.PHARE_BADGE' | translate }}</span>
+          </div>
           <h3>{{featuredProducts[0].title}}</h3>
         </div>
       </div>
@@ -54,6 +56,9 @@
         <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
           <div class="badges">
             <span class="badge top">🔥 Top</span>
+            @if (product.product_type === 'DIGITAL') {
+              <span class="badge digital">{{ 'PRODUCT_LIST.DIGITAL_BADGE' | translate }}</span>
+            }
           </div>
           <img [src]="product.image" [alt]="product.title">
           <div class="product-info">
@@ -83,7 +88,12 @@
       @for (product of latestProducts; track product.id) {
         <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
           <div class="badges">
-            <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_LIST.DIGITAL_BADGE' | translate }}</span>
+            @if (product.is_featured) {
+              <span class="badge featured">{{ 'PRODUCT_LIST.PHARE_BADGE' | translate }}</span>
+            }
+            @if (product.product_type === 'DIGITAL') {
+              <span class="badge digital">{{ 'PRODUCT_LIST.DIGITAL_BADGE' | translate }}</span>
+            }
           </div>
           <img [src]="product.image" [alt]="product.title">
           <div class="product-info">

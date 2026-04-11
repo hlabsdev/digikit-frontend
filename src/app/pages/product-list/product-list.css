@@ -250,37 +250,6 @@
   margin-bottom: 15px;
 }
 
-.badges {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  display: flex;
-  gap: 8px;
-}
-
-.badge {
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: white;
-}
-
-.badge.new {
-  background: #ff5e98;
-}
-
-.badge.featured {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(253, 160, 133, 0.4);
-}
-
-.badge.digital {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--primary-color);
-}
-
 .product-info {
   flex: 1;
   display: flex;

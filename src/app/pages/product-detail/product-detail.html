@@ -1,22 +1,25 @@
 <div class="container product-detail-page" *ngIf="product">
   <div class="breadcrumb">
-    <a routerLink="/">{{ 'PRODUCT_DETAIL.HOME' | translate }}</a> > <a routerLink="/products">{{ 'PRODUCT_DETAIL.PRODUCTS' | translate }}</a> > <span>{{product.title}}</span>
+    <a routerLink="/">{{ 'PRODUCT_DETAIL.HOME' | translate }}</a> > <a routerLink="/products">{{
+      'PRODUCT_DETAIL.PRODUCTS' | translate }}</a> > <span>{{product.title}}</span>
   </div>
 
   <div class="product-layout glass-panel">
     <div class="product-image">
-      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_DETAIL.NUMERIQUE' | translate }}</span>
+      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_DETAIL.NUMERIQUE' | translate
+        }}</span>
       <img [src]="mainImage || product.image" [alt]="product.title" class="main-img">
-      
+
       <!-- Galerie d'images -->
       <div class="image-gallery" *ngIf="product.images && product.images.length > 0">
-        <div class="gallery-thumbnail" [class.active]="(mainImage || product.image) === product.image" (click)="setMainImage(product.image)">
+        <div class="gallery-thumbnail" [class.active]="(mainImage || product.image) === product.image"
+          (click)="setMainImage(product.image)">
           <img [src]="product.image" [alt]="product.title">
         </div>
         @for (img of product.images; track img.id) {
-          <div class="gallery-thumbnail" [class.active]="mainImage === img.image" (click)="setMainImage(img.image)">
-            <img [src]="img.image" [alt]="img.alt_text || product.title">
-          </div>
+        <div class="gallery-thumbnail" [class.active]="mainImage === img.image" (click)="setMainImage(img.image)">
+          <img [src]="img.image" [alt]="img.alt_text || product.title">
+        </div>
         }
       </div>
     </div>
@@ -35,8 +38,10 @@
           <li>✔️ {{ 'PRODUCT_DETAIL.BENEFITS.GUARANTEE' | translate }}</li>
           <li>✔️ {{ 'PRODUCT_DETAIL.BENEFITS.SUPPORT' | translate }}</li>
           <li>
-            <span *ngIf="product.product_type === 'DIGITAL'">✔️ {{ 'PRODUCT_DETAIL.BENEFITS.INSTANT_DOWNLOAD' | translate }}</span>
-            <span *ngIf="product.product_type === 'PHYSICAL'">✔️ {{ 'PRODUCT_DETAIL.BENEFITS.FAST_DELIVERY' | translate }}</span>
+            <span *ngIf="product.product_type === 'DIGITAL'">✔️ {{ 'PRODUCT_DETAIL.BENEFITS.INSTANT_DOWNLOAD' |
+              translate }}</span>
+            <span *ngIf="product.product_type === 'PHYSICAL'">✔️ {{ 'PRODUCT_DETAIL.BENEFITS.FAST_DELIVERY' | translate
+              }}</span>
           </li>
         </ul>
       </div>
@@ -52,7 +57,8 @@
             <span class="material-symbols-outlined icon-small">bolt</span> {{ 'PRODUCT_DETAIL.DIRECT_BUY' | translate }}
           </button>
           <button class="btn-primary" (click)="addToCart()">
-            <span class="material-symbols-outlined icon-small">shopping_cart</span> {{ 'PRODUCT_DETAIL.ADD_TO_CART' | translate }}
+            <span class="material-symbols-outlined icon-small">shopping_cart</span> {{ 'PRODUCT_DETAIL.ADD_TO_CART' |
+            translate }}
           </button>
         </div>
       </div>

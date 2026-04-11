@@ -93,3 +93,42 @@ button {
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
+
+/* Badges System */
+.badges {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.badge.featured {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(253, 160, 133, 0.4);
+}
+
+.badge.digital {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: var(--primary-color);
+}
+
+.badge.top {
+  background: linear-gradient(135deg, #FF9966, #FF5E62);
+  color: white;
+}
+
