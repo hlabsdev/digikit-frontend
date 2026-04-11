@@ -8,38 +8,42 @@
     <!-- Sidebar Filters -->
     <aside class="sidebar filters-panel glass-panel">
       <div class="filter-group">
-        <h3>Catégories</h3>
+        <h3>{{ 'PRODUCT_LIST.FILTERS_CATEGORIES' | translate }}</h3>
         <div class="filter-options">
-          @for (category of categories; track category.id) {
+          @for (category of categories(); track category.id) {
           <label class="checkbox-label">
             <input type="checkbox" (change)="toggleCategory(category.id, $event)">
             <span class="label-text">{{category.name}}</span>
-            <span class="count">{{getCategoryCount(category.id)}}</span>
+            <span class="count">{{categoryCounts()[category.id] || 0}}</span>
           </label>
           }
         </div>
       </div>
 
       <div class="filter-group">
-        <h3>Type de Produit</h3>
+        <h3>{{ 'PRODUCT_LIST.FILTERS_TYPE' | translate }}</h3>
         <div class="filter-options">
           <label class="checkbox-label">
-            <input type="checkbox" [(ngModel)]="digitalOnly">
-            <span class="label-text">Produits Numériques</span>
+            <input type="checkbox" [ngModel]="digitalOnly()" (ngModelChange)="digitalOnly.set($event)">
+            <span class="label-text">{{ 'PRODUCT_LIST.FILTERS_DIGITAL' | translate }}</span>
           </label>
           <label class="checkbox-label">
-            <input type="checkbox" [(ngModel)]="physicalOnly">
-            <span class="label-text">Produits Physiques</span>
+            <input type="checkbox" [ngModel]="physicalOnly()" (ngModelChange)="physicalOnly.set($event)">
+            <span class="label-text">{{ 'PRODUCT_LIST.FILTERS_PHYSICAL' | translate }}</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" [ngModel]="licenseOnly()" (ngModelChange)="licenseOnly.set($event)">
+            <span class="label-text">{{ 'PRODUCT_LIST.FILTERS_LICENSE' | translate }}</span>
           </label>
         </div>
       </div>
 
       <div class="filter-group">
-        <h3>Disponibilité</h3>
+        <h3>{{ 'PRODUCT_LIST.FILTERS_AVAILABILITY' | translate }}</h3>
         <div class="filter-options">
           <label class="checkbox-label">
-            <input type="checkbox" [(ngModel)]="inStockOnly">
-            <span class="label-text">En Stock Uniquement</span>
+            <input type="checkbox" [ngModel]="inStockOnly()" (ngModelChange)="inStockOnly.set($event)">
+            <span class="label-text">{{ 'PRODUCT_LIST.FILTERS_IN_STOCK' | translate }}</span>
           </label>
         </div>
       </div>
@@ -51,26 +55,28 @@
       <div class="toolbar glass-panel">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" [placeholder]="'PRODUCT_LIST.SEARCH_PLACEHOLDER' | translate" [(ngModel)]="searchQuery">
+          <input type="text" [placeholder]="'PRODUCT_LIST.SEARCH_PLACEHOLDER' | translate" [ngModel]="searchQuery()"
+            (ngModelChange)="searchQuery.set($event)">
         </div>
 
         <div class="toolbar-actions">
-          <span class="results-count">Affichage de {{filteredProducts.length}} produits</span>
+          <span class="results-count">{{ 'PRODUCT_LIST.RESULTS_STATUS' | translate:{count: filteredProducts().length}
+            }}</span>
 
           <div class="sort-box">
-            <select [(ngModel)]="sortBy">
-              <option value="featured">Mis en avant</option>
-              <option value="new">Nouveautés</option>
-              <option value="price_asc">Prix: Croissant</option>
-              <option value="price_desc">Prix: Décroissant</option>
+            <select [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+              <option value="featured">{{ 'PRODUCT_LIST.SORT_FEATURED' | translate }}</option>
+              <option value="new">{{ 'PRODUCT_LIST.SORT_NEW' | translate }}</option>
+              <option value="price_asc">{{ 'PRODUCT_LIST.SORT_PRICE_ASC' | translate }}</option>
+              <option value="price_desc">{{ 'PRODUCT_LIST.SORT_PRICE_DESC' | translate }}</option>
             </select>
           </div>
 
           <div class="view-toggles">
-            <button class="view-toggle" [class.active]="viewMode === 'grid'" (click)="viewMode = 'grid'">
+            <button class="view-toggle" [class.active]="viewMode() === 'grid'" (click)="viewMode.set('grid')">
               <span class="icon">⊞</span>
             </button>
-            <button class="view-toggle" [class.active]="viewMode === 'list'" (click)="viewMode = 'list'">
+            <button class="view-toggle" [class.active]="viewMode() === 'list'" (click)="viewMode.set('list')">
               <span class="icon">☰</span>
             </button>
           </div>
@@ -78,8 +84,8 @@
       </div>
 
       <!-- Products Grid/List -->
-      <div class="products-container" [ngClass]="{'list-view': viewMode === 'list'}">
-        @for (product of filteredProducts; track product.id) {
+      <div class="products-container" [ngClass]="{'list-view': viewMode() === 'list'}">
+        @for (product of filteredProducts(); track product.id) {
         <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
           <div class="badges">
             @if (product.is_featured) {
@@ -103,7 +109,8 @@
               </button>
               <button class="btn-primary" (click)="addToCart($event, product)"
                 style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
-                <span class="material-symbols-outlined">shopping_cart</span> {{ 'PRODUCT_LIST.ADD_TO_CART' | translate }}
+                <span class="material-symbols-outlined">shopping_cart</span> {{ 'PRODUCT_LIST.ADD_TO_CART' | translate
+                }}
               </button>
             </div>
           </div>
@@ -111,8 +118,7 @@
         } @empty {
         <div class="empty-state glass-panel">
           <p>{{ 'PRODUCT_LIST.NO_RESULTS' | translate }}</p>
-          <button class="btn-outline"
-            (click)="searchQuery=''; digitalOnly=false; physicalOnly=false; selectedCategories.clear()">{{ 'PRODUCT_LIST.RESET_FILTERS' | translate }}</button>
+          <button class="btn-outline" (click)="resetFilters()">{{ 'PRODUCT_LIST.RESET_FILTERS' | translate }}</button>
         </div>
         }
       </div>

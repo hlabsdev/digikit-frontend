@@ -1,10 +1,15 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
+
+interface Category {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-product-list',
@@ -19,61 +24,84 @@ export class ProductList implements OnInit {
   cdr = inject(ChangeDetectorRef);
   router = inject(Router);
 
-  products: any[] = [];
-  categories: any[] = [];
+  // State Signals
+  products = signal<any[]>([]);
+  categories = signal<Category[]>([]);
+  searchQuery = signal('');
+  selectedCategories = signal<Set<number>>(new Set());
+  digitalOnly = signal(false);
+  physicalOnly = signal(false);
+  licenseOnly = signal(false);
+  inStockOnly = signal(false);
+  sortBy = signal('featured');
+  viewMode = signal<'grid' | 'list'>('grid');
 
-  // Filter States
-  searchQuery = '';
-  selectedCategories: Set<number> = new Set();
-  digitalOnly = false;
-  physicalOnly = false;
-  inStockOnly = false;
-  sortBy = 'featured';
-  viewMode: 'grid' | 'list' = 'grid';
+  // Computed: Category Counts (optimized)
+  categoryCounts = computed(() => {
+    const counts: Record<number, number> = {};
+    const allProducts = this.products();
+    allProducts.forEach(p => {
+      if (p.category?.id) {
+        counts[p.category.id] = (counts[p.category.id] || 0) + 1;
+      }
+    });
+    return counts;
+  });
 
-  get filteredProducts() {
-    let result = this.products;
+  // Computed: Filtered Products
+  filteredProducts = computed(() => {
+    let result = this.products();
+    const query = this.searchQuery().toLowerCase();
+    const selectedCats = this.selectedCategories();
+    const digital = this.digitalOnly();
+    const physical = this.physicalOnly();
+    const license = this.licenseOnly();
+    const sort = this.sortBy();
 
-    if (this.searchQuery) {
-      const q = this.searchQuery.toLowerCase();
+    if (query) {
       result = result.filter(p =>
-        p.title.toLowerCase().includes(q) ||
-        (p.description && p.description.toLowerCase().includes(q))
+        p.title.toLowerCase().includes(query) ||
+        (p.description && p.description.toLowerCase().includes(query))
       );
     }
 
-    if (this.selectedCategories.size > 0) {
-      result = result.filter(p => p.category && this.selectedCategories.has(p.category.id));
+    if (selectedCats.size > 0) {
+      result = result.filter(p => p.category && selectedCats.has(p.category.id));
     }
 
-    if (this.digitalOnly && !this.physicalOnly) {
+    // Type Filter Logic
+    if (digital && !physical && !license) {
       result = result.filter(p => p.product_type === 'DIGITAL');
-    } else if (this.physicalOnly && !this.digitalOnly) {
+    } else if (physical && !digital && !license) {
       result = result.filter(p => p.product_type === 'PHYSICAL');
+    } else if (license && !digital && !physical) {
+      result = result.filter(p => p.product_type === 'LICENSE');
     }
 
-    if (this.sortBy === 'price_asc') {
+    // Sort Logic
+    if (sort === 'price_asc') {
       result = [...result].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    } else if (this.sortBy === 'price_desc') {
+    } else if (sort === 'price_desc') {
       result = [...result].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-    } else if (this.sortBy === 'new') {
-      result = [...result].sort((a, b) => b.id - a.id); // mock new by highest ID
+    } else if (sort === 'new') {
+      result = [...result].sort((a, b) => b.id - a.id);
     }
 
     return result;
-  }
+  });
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
       next: (data) => {
-        this.products = data;
+        this.products.set(data);
         this.cdr.detectChanges();
       },
       error: (err) => console.error("Erreur API Django (produits):", err)
     });
+    
     this.productService.getCategories().subscribe({
       next: (data) => {
-        this.categories = data;
+        this.categories.set(data);
         this.cdr.detectChanges();
       },
       error: (err) => console.error("Erreur API Django (categories):", err)
@@ -82,21 +110,25 @@ export class ProductList implements OnInit {
 
   toggleCategory(categoryId: number, event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
-    if (isChecked) {
-      this.selectedCategories.add(categoryId);
-    } else {
-      this.selectedCategories.delete(categoryId);
-    }
+    this.selectedCategories.update(prev => {
+      const next = new Set(prev);
+      if (isChecked) next.add(categoryId);
+      else next.delete(categoryId);
+      return next;
+    });
   }
 
-  getCategoryCount(categoryId: number): number {
-    return this.products.filter(p => p.category?.id === categoryId).length;
+  resetFilters() {
+    this.searchQuery.set('');
+    this.digitalOnly.set(false);
+    this.physicalOnly.set(false);
+    this.licenseOnly.set(false);
+    this.selectedCategories.set(new Set());
   }
 
   addToCart(event: Event, product: any) {
     event.stopPropagation();
     this.cartService.addToCart(product, 1);
-    alert('Produit ajouté au panier !');
   }
 
   buyDirect(event: Event, product: any) {

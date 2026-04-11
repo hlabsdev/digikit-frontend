@@ -31,6 +31,8 @@
     "TOTAL": "Total",
     "ITEMS": "Articles commandés",
     "DOWNLOADS": "Vos téléchargements",
+    "LICENSE_KEYS": "Vos clés de licence",
+    "COPY_HINT": "Cliquez sur l'icône pour copier",
     "REMAINING": "Essais restants",
     "DOWNLOAD_NOW": "Télécharger",
     "ERROR_TITLE": "Oups !"
@@ -44,12 +46,27 @@
     "DIRECT_BUY": "Achat direct",
     "ADD_TO_CART": "Ajouter au Panier",
     "NO_RESULTS": "Aucun produit ne correspond à vos critères.",
-    "RESET_FILTERS": "Réinitialiser les filtres"
+    "RESET_FILTERS": "Réinitialiser les filtres",
+    "FILTERS_CATEGORIES": "Catégories",
+    "FILTERS_TYPE": "Type de Produit",
+    "FILTERS_DIGITAL": "Produits Numériques",
+    "FILTERS_PHYSICAL": "Produits Physiques",
+    "FILTERS_LICENSE": "Licences",
+    "FILTERS_AVAILABILITY": "Disponibilité",
+    "FILTERS_IN_STOCK": "En Stock Uniquement",
+    "RESULTS_STATUS": "Affichage de {{count}} produits",
+    "SORT_FEATURED": "Mis en avant",
+    "SORT_NEW": "Nouveautés",
+    "SORT_PRICE_ASC": "Prix : Croissant",
+    "SORT_PRICE_DESC": "Prix : Décroissant"
   },
   "PRODUCT_DETAIL": {
     "HOME": "Accueil",
     "PRODUCTS": "Produits",
     "NUMERIQUE": "Numérique",
+    "LICENSE": "Licence Digitale",
+    "STOCK_AVAILABLE": "licence(s) disponible(s)",
+    "OUT_OF_STOCK": "Rupture de stock",
     "PRICE_UNIT": "FCFA",
     "BENEFITS": {
       "GUARANTEE": "Qualité Premium Garantie",
@@ -62,7 +79,7 @@
     "TRUST": {
       "EMAIL_DELIVERY": "Livraison par e-mail",
       "H24_DELIVERY": "Livraison en 24h",
-      "SECURE_PAYMENT": "Paiement Sécurisé Flooz/Tmoney"
+      "SECURE_PAYMENT": "Paiement Sécurisé Mobile Money"
     }
   },
   "NAV": {
@@ -75,5 +92,48 @@
     "DESCRIPTION": "Votre destination premium pour les produits numériques et physiques de haute qualité.",
     "MISSION_TITLE": "Notre Mission",
     "MISSION_TEXT": "Fournir une plateforme sécurisée et intuitive permettant à chacun d'accéder aux meilleurs outils et ressources, avec une livraison instantanée pour le digital et une logistique rapide pour le physique."
+  },
+  "FOOTER": {
+    "DESCRIPTION": "Votre boutique premium pour des produits digitaux et physiques de haute qualité. Simple, rapide et sécurisé.",
+    "CATEGORIES": "Catégories",
+    "DIGITAL_PRODUCTS": "Produits Numériques",
+    "PHYSICAL_PRODUCTS": "Produits Physiques",
+    "LATEST": "Nouveautés",
+    "LEGAL_SUPPORT": "Légal & Support",
+    "CONTACT": "Contactez-nous",
+    "TERMS": "Conditions de vente",
+    "PRIVACY": "Politique de confidentialité",
+    "SECURE_PAYMENT": "Paiement Sécurisé",
+    "MOBILE_MONEY": "Mobile money",
+    "COPYRIGHT": "Hlabs © 2026 DIGIKIT. Tous droits réservés."
+  },
+  "CHECKOUT": {
+    "TITLE": "Finaliser la Commande",
+    "DETAILS_TITLE": "Vos Coordonnées",
+    "DETAILS_SUBTITLE": "Vos informations pour la livraison ou le téléchargement.",
+    "NAME_LABEL": "Nom complet *",
+    "NAME_PLACEHOLDER": "Ex: Hermann Kekeli",
+    "EMAIL_LABEL": "Email *",
+    "EMAIL_PLACEHOLDER": "Pour recevoir vos produits numériques",
+    "PHONE_LABEL": "Numéro de téléphone *",
+    "PHONE_PLACEHOLDER": "Nécessaire pour le paiement (mobile money)",
+    "PAYMENT_BTN": "Procéder au paiement",
+    "SECURE_INFO": "Transactions sécurisées et cryptées - Aucune création de compte requise.",
+    "SUMMARY_TITLE": "Votre Panier",
+    "EMPTY_CART": "Votre panier est vide.",
+    "BACK_SHOP": "Retour à la boutique",
+    "SUBTOTAL": "Sous-total",
+    "TOTAL": "Total",
+    "ERROR_REQUIRED": "Veuillez remplir tous les champs obligatoires.",
+    "ERROR_INIT": "Erreur lors de l'initialisation du tunnel de paiement.",
+    "ERROR_BACKEND": "Impossible de joindre le serveur. Assurez-vous que le backend est lancé."
+  },
+  "COMMON": {
+    "VIEW_ALL": "Voir tout",
+    "COPIED": "Copie effectuée !",
+    "ADDED_TO_CART": "Produit ajouté au panier !",
+    "ITEMS_COUNT": "{{count}} article(s)",
+    "ERROR_ACCESS_DENIED": "Accès refusé ou commande introuvable.",
+    "ERROR_MISSING_SESSION": "Paramètres de session manquants."
   }
 }

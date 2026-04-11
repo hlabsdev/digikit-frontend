@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 
@@ -18,6 +18,7 @@ export class ProductDetail implements OnInit {
   productService = inject(ProductService);
   cartService = inject(CartService);
   cdr = inject(ChangeDetectorRef);
+  translate = inject(TranslateService);
 
   product: any;
   quantity: number = 1;
@@ -39,7 +40,7 @@ export class ProductDetail implements OnInit {
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, this.quantity);
-      alert('Produit ajouté au panier !');
+      alert(this.translate.instant('COMMON.ADDED_TO_CART'));
     }
   }
 

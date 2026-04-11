@@ -26,7 +26,7 @@
         <div class="cart-dropdown glass-panel">
           <div class="cart-header">
             <span>{{ 'CART.TITLE' | translate }}</span>
-            <span class="item-count">{{cartItemCount}} items</span>
+            <span class="item-count">{{ 'COMMON.ITEMS_COUNT' | translate:{count: cartItemCount} }}</span>
           </div>
 
           <div class="cart-items-list" *ngIf="cartItems.length > 0">

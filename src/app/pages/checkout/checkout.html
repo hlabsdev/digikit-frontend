@@ -1,46 +1,47 @@
 <div class="container checkout-page">
-  <h1 class="page-title">Finaliser la Commande</h1>
+  <h1 class="page-title">{{ 'CHECKOUT.TITLE' | translate }}</h1>
 
   <div class="checkout-layout">
     <!-- Form -->
     <div class="checkout-form glass-panel">
-      <h2>Vos Coordonnées</h2>
-      <p class="subtitle">Vos informations pour la livraison ou le téléchargement.</p>
+      <h2>{{ 'CHECKOUT.DETAILS_TITLE' | translate }}</h2>
+      <p class="subtitle">{{ 'CHECKOUT.DETAILS_SUBTITLE' | translate }}</p>
 
       <form (ngSubmit)="processCheckout()">
         <div class="form-group">
-          <label>Nom complet *</label>
-          <input type="text" [(ngModel)]="customerName" name="name" required placeholder="Ex: Hermann Kekeli">
+          <label>{{ 'CHECKOUT.NAME_LABEL' | translate }}</label>
+          <input type="text" [(ngModel)]="customerName" name="name" required [placeholder]="'CHECKOUT.NAME_PLACEHOLDER' | translate">
         </div>
 
         <div class="form-group">
-          <label>Email *</label>
+          <label>{{ 'CHECKOUT.EMAIL_LABEL' | translate }}</label>
           <input type="email" [(ngModel)]="customerEmail" name="email" required
-            placeholder="Pour recevoir vos produits numériques">
+            [placeholder]="'CHECKOUT.EMAIL_PLACEHOLDER' | translate">
         </div>
 
         <div class="form-group">
-          <label>Numéro de téléphone *</label>
+          <label>{{ 'CHECKOUT.PHONE_LABEL' | translate }}</label>
           <input type="tel" [(ngModel)]="customerPhone" name="phone" required
-            placeholder="Nécessaire pour le paiement (mobile money)">
+            [placeholder]="'CHECKOUT.PHONE_PLACEHOLDER' | translate">
         </div>
 
-        <button type="submit" class="btn-primary w-100 mt-4" [disabled]="cartItems.length === 0">Proceder au
-          paiement</button>
+        <button type="submit" class="btn-primary w-100 mt-4" [disabled]="cartItems.length === 0">
+          {{ 'CHECKOUT.PAYMENT_BTN' | translate }}
+        </button>
       </form>
 
       <div class="secure-info">
-        <span>🔒</span> Transactions sécurisées et cryptées - Aucune création de compte requise.
+        <span>🔒</span> {{ 'CHECKOUT.SECURE_INFO' | translate }}
       </div>
     </div>
 
     <!-- Order Summary -->
     <div class="order-summary glass-panel">
-      <h2>Votre Panier</h2>
+      <h2>{{ 'CHECKOUT.SUMMARY_TITLE' | translate }}</h2>
 
       <div class="empty-cart" *ngIf="cartItems.length === 0">
-        <p>Votre panier est vide.</p>
-        <button class="btn-outline" routerLink="/products">Retour à la boutique</button>
+        <p>{{ 'CHECKOUT.EMPTY_CART' | translate }}</p>
+        <button class="btn-outline" routerLink="/products">{{ 'CHECKOUT.BACK_SHOP' | translate }}</button>
       </div>
 
       <div class="cart-items" *ngIf="cartItems.length > 0">
@@ -63,11 +64,11 @@
 
       <div class="summary-totals" *ngIf="cartItems.length > 0">
         <div class="total-row">
-          <span>Sous-total</span>
+          <span>{{ 'CHECKOUT.SUBTOTAL' | translate }}</span>
           <span>{{totalAmount.toFixed(2)}} FCFA</span>
         </div>
         <div class="total-row grand-total">
-          <span>Total</span>
+          <span>{{ 'CHECKOUT.TOTAL' | translate }}</span>
           <span>{{totalAmount.toFixed(2)}} FCFA</span>
         </div>
       </div>

@@ -2,17 +2,19 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService, CartItem } from '../../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css'
 })
 export class Checkout implements OnInit {
   cartService = inject(CartService);
+  translate = inject(TranslateService);
 
   cartItems: CartItem[] = [];
   customerName = '';
@@ -42,7 +44,7 @@ export class Checkout implements OnInit {
 
   processCheckout() {
     if (!this.customerName || !this.customerEmail || !this.customerPhone) {
-      alert("Veuillez remplir tous les champs obligatoires (!)");
+      alert(this.translate.instant('CHECKOUT.ERROR_REQUIRED'));
       return;
     }
 
@@ -67,12 +69,12 @@ export class Checkout implements OnInit {
           this.cartService.clearCart(); // Empty cart since order created
           window.location.href = data.payment_url;
         } else {
-          alert("Erreur lors de l'initialisation du tunnel Moneroo.");
+          alert(this.translate.instant('CHECKOUT.ERROR_INIT'));
         }
       })
       .catch(err => {
         console.error(err);
-        alert("Assurez-vous que le Backend Django (port 8000) et la base de données sont bien lancés pour traiter les API calls.");
+        alert(this.translate.instant('CHECKOUT.ERROR_BACKEND'));
       });
   }
 }

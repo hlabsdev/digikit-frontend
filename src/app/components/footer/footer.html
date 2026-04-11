@@ -2,35 +2,34 @@
   <div class="container footer-content">
     <div class="footer-brand">
       <img src="/assets/logo%20premium.png" alt="DIGIKIT Logo" class="footer-logo">
-      <p>Votre boutique premium pour des produits digitaux et physiques de haute qualité. Simple, rapide et sécurisé.</p>
-    </div>
-    
-    <div class="footer-links">
-      <h4>Catégories</h4>
-      <a routerLink="/products" [queryParams]="{type: 'digital'}">Produits Numériques</a>
-      <a routerLink="/products" [queryParams]="{type: 'physical'}">Produits Physiques</a>
-      <a routerLink="/products">Nouveautés</a>
+      <p>{{ 'FOOTER.DESCRIPTION' | translate }}</p>
     </div>
 
     <div class="footer-links">
-      <h4>Légal & Support</h4>
-      <a href="mailto:kekeligolo@gmail.com">Contactez-nous</a>
-      <a href="#">Conditions de vente</a>
-      <a href="#">Politique de confidentialité</a>
+      <h4>{{ 'FOOTER.CATEGORIES' | translate }}</h4>
+      <a routerLink="/products" [queryParams]="{type: 'digital'}">{{ 'FOOTER.DIGITAL_PRODUCTS' | translate }}</a>
+      <a routerLink="/products" [queryParams]="{type: 'physical'}">{{ 'FOOTER.PHYSICAL_PRODUCTS' | translate }}</a>
+      <a routerLink="/products">{{ 'FOOTER.LATEST' | translate }}</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>{{ 'FOOTER.LEGAL_SUPPORT' | translate }}</h4>
+      <a href="mailto:kekeligolo@gmail.com">{{ 'FOOTER.CONTACT' | translate }}</a>
+      <a href="#">{{ 'FOOTER.TERMS' | translate }}</a>
+      <a href="#">{{ 'FOOTER.PRIVACY' | translate }}</a>
     </div>
 
     <div class="footer-payment">
-      <h4>Paiement Sécurisé</h4>
+      <h4>{{ 'FOOTER.SECURE_PAYMENT' | translate }}</h4>
       <div class="payment-methods">
-        <span>Tmoney</span>
-        <span>Flooz</span>
+        <span>{{ 'FOOTER.MOBILE_MONEY' | translate }}</span>
         <span>Visa</span>
         <span>Mastercard</span>
       </div>
     </div>
   </div>
-  
+
   <div class="footer-bottom text-center">
-    <p>&copy; 2026 DIGIKIT. Tous droits réservés.</p>
+    <p>{{ 'FOOTER.COPYRIGHT' | translate }}</p>
   </div>
 </footer>

@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-order-detail',
@@ -42,18 +42,40 @@ import { TranslateModule } from '@ngx-translate/core';
           </div>
         </div>
 
-        <!-- Section Téléchargements -->
-        <div class="downloads-section glass-panel" *ngIf="order.download_links.length > 0">
-          <h2>{{ 'ORDER.DOWNLOADS' | translate }}</h2>
-          <div class="links-list">
-            <div class="download-card" *ngFor="let link of order.download_links">
-              <div class="link-info">
-                <strong>{{link.product_title}}</strong>
-                <p>{{ 'ORDER.REMAINING' | translate }}: {{link.max_downloads - link.downloads_count}}</p>
+        <!-- Section Téléchargements & Licences -->
+        <div class="downloads-section glass-panel" *ngIf="order.download_links.length > 0 || order.license_keys.length > 0">
+          <!-- Liens de téléchargement -->
+          <div *ngIf="order.download_links.length > 0">
+            <h2 class="section-title"><span class="material-symbols-outlined">download</span> {{ 'ORDER.DOWNLOADS' | translate }}</h2>
+            <div class="links-list">
+              <div class="download-card" *ngFor="let link of order.download_links">
+                <div class="link-info">
+                  <strong>{{link.product_title}}</strong>
+                  <p>{{ 'ORDER.REMAINING' | translate }}: {{link.max_downloads - link.downloads_count}}</p>
+                </div>
+                <a [href]="'http://localhost:8000/api/download/' + link.token + '/'" class="btn-primary mini-btn" target="_blank">
+                  {{ 'ORDER.DOWNLOAD_NOW' | translate }}
+                </a>
               </div>
-              <a [href]="'http://localhost:8000/api/download/' + link.token + '/'" class="btn-primary mini-btn" target="_blank">
-                <span class="material-symbols-outlined">download</span> {{ 'ORDER.DOWNLOAD_NOW' | translate }}
-              </a>
+            </div>
+          </div>
+
+          <!-- Clés de licence -->
+          <div *ngIf="order.license_keys.length > 0" [style.margin-top]="order.download_links.length > 0 ? '30px' : '0'">
+            <h2 class="section-title"><span class="material-symbols-outlined">vpn_key</span> {{ 'ORDER.LICENSE_KEYS' | translate }}</h2>
+            <div class="license-list">
+              <div class="license-card" *ngFor="let lk of order.license_keys">
+                <div class="lk-header">
+                  <strong>{{lk.product}}</strong>
+                  <span class="copy-hint">{{ 'ORDER.COPY_HINT' | translate }}</span>
+                </div>
+                <div class="key-display">
+                  <code>{{lk.key}}</code>
+                  <button class="copy-btn" (click)="copyToClipboard(lk.key)">
+                    <span class="material-symbols-outlined">content_copy</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -89,6 +111,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class OrderDetail implements OnInit {
   route = inject(ActivatedRoute);
   http = inject(HttpClient);
+  translate = inject(TranslateService);
   
   order: any = null;
   error: string | null = null;
@@ -101,10 +124,15 @@ export class OrderDetail implements OnInit {
       this.http.get(`http://localhost:8000/api/orders/${id}/detail/?session_id=${sessionId}`)
         .subscribe({
           next: (data) => this.order = data,
-          error: (err) => this.error = "Accès refusé ou commande introuvable."
+          error: (err) => this.error = this.translate.instant('COMMON.ERROR_ACCESS_DENIED')
         });
     } else {
-      this.error = "Paramètres de session manquants.";
+      this.error = this.translate.instant('COMMON.ERROR_MISSING_SESSION');
     }
+  }
+
+  copyToClipboard(key: string) {
+    navigator.clipboard.writeText(key);
+    alert(this.translate.instant('COMMON.COPIED'));
   }
 }

@@ -49,13 +49,13 @@
   <section class="home-section" *ngIf="topSellingProducts.length > 0">
     <div class="section-header">
       <h2>{{ 'HOME.SECTIONS.TOP_SELLING' | translate }}</h2>
-      <a routerLink="/products" class="view-all">Voir tout</a>
+      <a routerLink="/products" class="view-all">{{ 'COMMON.VIEW_ALL' | translate }}</a>
     </div>
     <div class="products-grid">
       @for (product of topSellingProducts; track product.id) {
         <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
           <div class="badges">
-            <span class="badge top">🔥 Top</span>
+            <span class="badge top">🔥 {{ 'PRODUCT_LIST.SORT_NEW' | translate }}</span>
             @if (product.product_type === 'DIGITAL') {
               <span class="badge digital">{{ 'PRODUCT_LIST.DIGITAL_BADGE' | translate }}</span>
             }
@@ -82,7 +82,7 @@
   <section class="home-section" *ngIf="latestProducts.length > 0">
     <div class="section-header">
       <h2>{{ 'HOME.SECTIONS.LATEST' | translate }}</h2>
-      <a routerLink="/products" class="view-all">Voir tout</a>
+      <a routerLink="/products" class="view-all">{{ 'COMMON.VIEW_ALL' | translate }}</a>
     </div>
     <div class="products-grid">
       @for (product of latestProducts; track product.id) {

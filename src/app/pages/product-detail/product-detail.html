@@ -6,8 +6,14 @@
 
   <div class="product-layout glass-panel">
     <div class="product-image">
-      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_DETAIL.NUMERIQUE' | translate
-        }}</span>
+      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">{{ 'PRODUCT_DETAIL.NUMERIQUE' | translate }}</span>
+      <span class="badge license" *ngIf="product.product_type === 'LICENSE'">{{ 'PRODUCT_DETAIL.LICENSE' | translate }}</span>
+      
+      <!-- Badge Stock -->
+      <div class="stock-status" *ngIf="product.product_type === 'LICENSE'">
+        <span class="stock-dot" [class.out]="product.stock_available === 0"></span>
+        {{ product.stock_available > 0 ? (product.stock_available + ' ' + ('PRODUCT_DETAIL.STOCK_AVAILABLE' | translate)) : ('PRODUCT_DETAIL.OUT_OF_STOCK' | translate) }}
+      </div>
       <img [src]="mainImage || product.image" [alt]="product.title" class="main-img">
 
       <!-- Galerie d'images -->
