@@ -18,7 +18,7 @@ export class Checkout implements OnInit {
   customerName = '';
   customerEmail = '';
   customerPhone = '';
-  
+
   ngOnInit() {
     this.cartService.cart$.subscribe(items => {
       this.cartItems = items;
@@ -45,7 +45,7 @@ export class Checkout implements OnInit {
       alert("Veuillez remplir tous les champs obligatoires (!)");
       return;
     }
-    
+
     // Simulate API POST request to Django
     fetch('http://localhost:8000/api/orders/create/', {
       method: 'POST',
@@ -61,18 +61,18 @@ export class Checkout implements OnInit {
         }))
       })
     })
-    .then(res => res.json())
-    .then(data => {
-      if (data.payment_url) {
-        this.cartService.clearCart(); // Empty cart since order created
-        window.location.href = data.payment_url;
-      } else {
-        alert("Erreur lors de l'initialisation du tunnel Moneroo.");
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Assurez-vous que le Backend Django (port 8000) et la base de données sont bien lancés pour traiter les API calls.");
-    });
+      .then(res => res.json())
+      .then(data => {
+        if (data.payment_url) {
+          this.cartService.clearCart(); // Empty cart since order created
+          window.location.href = data.payment_url;
+        } else {
+          alert("Erreur lors de l'initialisation du tunnel Moneroo.");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Assurez-vous que le Backend Django (port 8000) et la base de données sont bien lancés pour traiter les API calls.");
+      });
   }
 }

@@ -19,6 +19,7 @@ export class ProductList implements OnInit {
   ngOnInit() {
     this.productService.getProducts().subscribe({
       next: (data) => this.products = data,
+      complete: () => console.log(this.products),
       error: (err) => console.error("Erreur API Django (produits):", err)
     });
   }

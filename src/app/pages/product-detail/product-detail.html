@@ -5,18 +5,18 @@
 
   <div class="product-layout glass-panel">
     <div class="product-image">
-      <span class="badge digital" *ngIf="product.type === 'Digital'">Numérique</span>
-      <span class="badge new" *ngIf="product.isNew">Nouveau</span>
+      <span class="badge digital" *ngIf="product.product_type === 'DIGITAL'">Numérique</span>
       <img [src]="product.image" [alt]="product.title">
     </div>
-    
+
     <div class="product-info">
-      <p class="category">{{product.category}}</p>
+      <p class="category">{{product.category?.name}}</p>
       <h1>{{product.title}}</h1>
-      <p class="description">Profitez d'un produit conçu avec une qualité exceptionnelle. Adapté à tous vos besoins professionnels et personnels. Obtenez un accès instantané et sécurisé.</p>
-      
+      <p class="description">Profitez d'un produit conçu avec une qualité exceptionnelle. Adapté à tous vos besoins
+        professionnels et personnels. Obtenez un accès instantané et sécurisé.</p>
+
       <div class="price-section">
-        <span class="price">${{product.price}}</span>
+        <span class="price">{{product.price}} FCFA</span>
       </div>
 
       <div class="benefits">
@@ -24,12 +24,12 @@
           <li>✔️ Qualité Premium Garantie</li>
           <li>✔️ Support Client 7j/7</li>
           <li>
-            <span *ngIf="product.type === 'Digital'">✔️ Téléchargement Instantané</span>
-            <span *ngIf="product.type === 'Physical'">✔️ Livraison Rapide</span>
+            <span *ngIf="product.product_type === 'DIGITAL'">✔️ Téléchargement Instantané</span>
+            <span *ngIf="product.product_type === 'PHYSICAL'">✔️ Livraison Rapide</span>
           </li>
         </ul>
       </div>
-      
+
       <div class="action-section">
         <div class="quantity-picker">
           <button (click)="quantity = quantity > 1 ? quantity - 1 : 1">-</button>
@@ -42,11 +42,12 @@
       <div class="trust-badges">
         <div class="trust-item">
           <span>📦</span>
-          <p *ngIf="product.type === 'Digital'">Livraison par e-mail</p>
-          <p *ngIf="product.type === 'Physical'">Livraison en 24h</p>
+          <p *ngIf="product.product_type === 'DIGITAL'">Livraison par e-mail</p>
+          <p *ngIf="product.product_type === 'PHYSICAL'">Livraison en 24h</p>
         </div>
         <div class="trust-item">
-          <span>🔒</span> <p>Paiement Sécurisé Flooz/Tmoney</p>
+          <span>🔒</span>
+          <p>Paiement Sécurisé Flooz/Tmoney</p>
         </div>
       </div>
     </div>

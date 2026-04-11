@@ -3,7 +3,7 @@
     <h2>Nos Produits</h2>
     <p>Parcourez notre catalogue complet de produits numériques et physiques</p>
   </div>
-  
+
   <div class="filters-bar">
     <button class="btn-outline active">Tous</button>
     <button class="btn-outline">Numériques</button>
@@ -11,20 +11,25 @@
   </div>
 
   <div class="products-grid">
-    <div class="product-card glass-panel" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+    @for (product of products; track product.id) {
+    <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
       <div class="badges">
-        <span class="badge new" *ngIf="product.isNew">Nouveau</span>
-        <span class="badge digital" *ngIf="product.type === 'Digital'">Numérique</span>
+        @if (product.product_type === 'DIGITAL') {
+        <span class="badge digital">Numérique</span>
+        }
       </div>
       <img [src]="product.image" [alt]="product.title">
       <div class="product-info">
         <h3>{{product.title}}</h3>
-        <p class="category">{{product.category}}</p>
+        <p class="category">{{product.category?.name}}</p>
         <div class="price-row">
-          <span class="price">${{product.price}}</span>
+          <span class="price">{{product.price}} FCFA</span>
           <button class="add-to-cart" (click)="addToCart($event, product)">+</button>
         </div>
       </div>
     </div>
+    } @empty {
+    <p>Aucun produit disponible.</p>
+    }
   </div>
 </div>
