@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
@@ -15,6 +15,8 @@ import { CartService } from '../../services/cart.service';
 export class ProductList implements OnInit {
   productService = inject(ProductService);
   cartService = inject(CartService);
+  cdr = inject(ChangeDetectorRef);
+  router = inject(Router);
 
   products: any[] = [];
   categories: any[] = [];
@@ -62,11 +64,17 @@ export class ProductList implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts().subscribe({
-      next: (data) => this.products = data,
+      next: (data) => {
+        this.products = data;
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error("Erreur API Django (produits):", err)
     });
     this.productService.getCategories().subscribe({
-      next: (data) => this.categories = data,
+      next: (data) => {
+        this.categories = data;
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error("Erreur API Django (categories):", err)
     });
   }
@@ -88,5 +96,11 @@ export class ProductList implements OnInit {
     event.stopPropagation();
     this.cartService.addToCart(product, 1);
     alert('Produit ajouté au panier !');
+  }
+
+  buyDirect(event: Event, product: any) {
+    event.stopPropagation();
+    this.cartService.addToCart(product, 1);
+    this.router.navigate(['/checkout']);
   }
 }

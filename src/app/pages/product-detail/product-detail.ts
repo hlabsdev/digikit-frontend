@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
@@ -16,7 +16,8 @@ export class ProductDetail implements OnInit {
   router = inject(Router);
   productService = inject(ProductService);
   cartService = inject(CartService);
-  
+  cdr = inject(ChangeDetectorRef);
+
   product: any;
   quantity: number = 1;
 
@@ -24,7 +25,10 @@ export class ProductDetail implements OnInit {
     this.route.params.subscribe(params => {
       const id = +params['id'];
       this.productService.getProductById(id).subscribe({
-        next: (data) => this.product = data,
+        next: (data) => {
+          this.product = data;
+          this.cdr.detectChanges();
+        },
         error: (err) => console.error("Erreur API Django (détail):", err)
       });
     });
