@@ -37,11 +37,11 @@
           <button (click)="quantity = quantity + 1">+</button>
         </div>
         <div class="buttons-group">
-          <button class="btn-secondary add-btn" (click)="addToCart()">
-            <span class="material-symbols-outlined icon-small">shopping_cart</span> Ajouter au Panier
-          </button>
-          <button class="btn-primary buy-btn" (click)="buyDirect()">
+          <button class="btn-outline" (click)="buyDirect()">
             <span class="material-symbols-outlined icon-small">bolt</span> Achat direct
+          </button>
+          <button class="btn-primary" (click)="addToCart()">
+            <span class="material-symbols-outlined icon-small">shopping_cart</span> Ajouter au Panier
           </button>
         </div>
       </div>

@@ -90,16 +90,18 @@
           <div class="product-info">
             <h3>{{product.title}}</h3>
             <p class="category">{{product.category?.name}}</p>
-            <div class="price-row" style="display: flex; flex-direction: column; gap: 8px; align-items: stretch; margin-top: auto;">
+            <div class="price-row" style="margin-top: auto; margin-bottom: 15px;">
               <span class="price">{{product.price}} FCFA</span>
-              <div class="buttons-group" style="display: flex; gap: 8px;">
-                <button class="btn-secondary add-btn" (click)="addToCart($event, product)" style="flex: 1; padding: 6px; font-size: 0.9em;">
-                  <span class="material-symbols-outlined icon-small" style="font-size: 1.2em;">shopping_cart</span> Panier
-                </button>
-                <button class="btn-primary buy-btn" (click)="buyDirect($event, product)" style="flex: 1; padding: 6px; font-size: 0.9em;">
-                  <span class="material-symbols-outlined icon-small" style="font-size: 1.2em;">bolt</span> Acheter
-                </button>
-              </div>
+            </div>
+            <div class="card-actions" style="display: flex; flex-direction: column; gap: 10px;">
+              <button class="btn-outline" (click)="buyDirect($event, product)"
+                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
+                <span class="material-symbols-outlined">bolt</span> Achat direct
+              </button>
+              <button class="btn-primary" (click)="addToCart($event, product)"
+                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
+                <span class="material-symbols-outlined">shopping_cart</span> Ajouter au Panier
+              </button>
             </div>
           </div>
         </div>
