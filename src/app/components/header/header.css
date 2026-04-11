@@ -50,6 +50,7 @@
   width: 250px;
   outline: none;
 }
+
 .search-bar input:focus {
   border-color: var(--primary-color);
 }
@@ -158,6 +159,7 @@
   margin-bottom: 2px;
   display: -webkit-box;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
