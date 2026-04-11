@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 
@@ -13,6 +13,7 @@ import { CartService } from '../../services/cart.service';
 })
 export class ProductDetail implements OnInit {
   route = inject(ActivatedRoute);
+  router = inject(Router);
   productService = inject(ProductService);
   cartService = inject(CartService);
   
@@ -33,6 +34,13 @@ export class ProductDetail implements OnInit {
     if (this.product) {
       this.cartService.addToCart(this.product, this.quantity);
       alert('Produit ajouté au panier !');
+    }
+  }
+
+  buyDirect() {
+    if (this.product) {
+      this.cartService.addToCart(this.product, this.quantity);
+      this.router.navigate(['/checkout']);
     }
   }
 }

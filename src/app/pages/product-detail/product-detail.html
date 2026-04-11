@@ -36,7 +36,14 @@
           <span>{{quantity}}</span>
           <button (click)="quantity = quantity + 1">+</button>
         </div>
-        <button class="btn-primary add-btn" (click)="addToCart()">🛒 Ajouter au Panier</button>
+        <div class="buttons-group">
+          <button class="btn-secondary add-btn" (click)="addToCart()">
+            <span class="material-symbols-outlined icon-small">shopping_cart</span> Ajouter au Panier
+          </button>
+          <button class="btn-primary buy-btn" (click)="buyDirect()">
+            <span class="material-symbols-outlined icon-small">bolt</span> Achat direct
+          </button>
+        </div>
       </div>
 
       <div class="trust-badges">

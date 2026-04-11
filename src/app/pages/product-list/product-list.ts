@@ -15,7 +15,7 @@ import { CartService } from '../../services/cart.service';
 export class ProductList implements OnInit {
   productService = inject(ProductService);
   cartService = inject(CartService);
-  
+
   products: any[] = [];
   categories: any[] = [];
 
@@ -33,8 +33,8 @@ export class ProductList implements OnInit {
 
     if (this.searchQuery) {
       const q = this.searchQuery.toLowerCase();
-      result = result.filter(p => 
-        p.title.toLowerCase().includes(q) || 
+      result = result.filter(p =>
+        p.title.toLowerCase().includes(q) ||
         (p.description && p.description.toLowerCase().includes(q))
       );
     }
