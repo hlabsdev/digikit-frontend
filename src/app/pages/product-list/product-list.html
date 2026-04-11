@@ -4,32 +4,107 @@
     <p>Parcourez notre catalogue complet de produits numériques et physiques</p>
   </div>
 
-  <div class="filters-bar">
-    <button class="btn-outline active">Tous</button>
-    <button class="btn-outline">Numériques</button>
-    <button class="btn-outline">Physiques</button>
-  </div>
-
-  <div class="products-grid">
-    @for (product of products; track product.id) {
-    <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
-      <div class="badges">
-        @if (product.product_type === 'DIGITAL') {
-        <span class="badge digital">Numérique</span>
-        }
-      </div>
-      <img [src]="product.image" [alt]="product.title">
-      <div class="product-info">
-        <h3>{{product.title}}</h3>
-        <p class="category">{{product.category?.name}}</p>
-        <div class="price-row">
-          <span class="price">{{product.price}} FCFA</span>
-          <button class="add-to-cart" (click)="addToCart($event, product)">+</button>
+  <div class="products-layout">
+    <!-- Sidebar Filters -->
+    <aside class="sidebar filters-panel glass-panel">
+      <div class="filter-group">
+        <h3>Catégories</h3>
+        <div class="filter-options">
+          @for (category of categories; track category.id) {
+          <label class="checkbox-label">
+            <input type="checkbox" (change)="toggleCategory(category.id, $event)">
+            <span class="label-text">{{category.name}}</span>
+            <span class="count">{{getCategoryCount(category.id)}}</span>
+          </label>
+          }
         </div>
       </div>
-    </div>
-    } @empty {
-    <p>Aucun produit disponible.</p>
-    }
+
+      <div class="filter-group">
+        <h3>Type de Produit</h3>
+        <div class="filter-options">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="digitalOnly">
+            <span class="label-text">Produits Numériques</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="physicalOnly">
+            <span class="label-text">Produits Physiques</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Disponibilité</h3>
+        <div class="filter-options">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="inStockOnly">
+            <span class="label-text">En Stock Uniquement</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Toolbar: Search, Sort, View -->
+      <div class="toolbar glass-panel">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Rechercher un produit..." [(ngModel)]="searchQuery">
+        </div>
+
+        <div class="toolbar-actions">
+          <span class="results-count">Affichage de {{filteredProducts.length}} produits</span>
+
+          <div class="sort-box">
+            <select [(ngModel)]="sortBy">
+              <option value="featured">Mis en avant</option>
+              <option value="new">Nouveautés</option>
+              <option value="price_asc">Prix: Croissant</option>
+              <option value="price_desc">Prix: Décroissant</option>
+            </select>
+          </div>
+
+          <div class="view-toggles">
+            <button class="view-toggle" [class.active]="viewMode === 'grid'" (click)="viewMode = 'grid'">
+              <span class="icon">⊞</span>
+            </button>
+            <button class="view-toggle" [class.active]="viewMode === 'list'" (click)="viewMode = 'list'">
+              <span class="icon">☰</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Grid/List -->
+      <div class="products-container" [ngClass]="{'list-view': viewMode === 'list'}">
+        @for (product of filteredProducts; track product.id) {
+        <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
+          <div class="badges">
+            @if (product.product_type === 'DIGITAL') {
+            <span class="badge digital">Numérique</span>
+            }
+          </div>
+          <img [src]="product.image" [alt]="product.title">
+          <div class="product-info">
+            <h3>{{product.title}}</h3>
+            <p class="category">{{product.category?.name}}</p>
+            <div class="price-row">
+              <span class="price">{{product.price}} FCFA</span>
+              <button class="add-to-cart" (click)="addToCart($event, product)">+</button>
+            </div>
+          </div>
+        </div>
+        } @empty {
+        <div class="empty-state glass-panel">
+          <p>Aucun produit ne correspond à vos critères.</p>
+          <button class="btn-outline"
+            (click)="searchQuery=''; digitalOnly=false; physicalOnly=false; selectedCategories.clear()">Réinitialiser
+            les filtres</button>
+        </div>
+        }
+      </div>
+    </main>
   </div>
 </div>
