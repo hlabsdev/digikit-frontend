@@ -20,6 +20,7 @@ export class ProductDetail implements OnInit {
 
   product: any;
   quantity: number = 1;
+  mainImage: string | null = null;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -46,5 +47,9 @@ export class ProductDetail implements OnInit {
       this.cartService.addToCart(this.product, this.quantity);
       this.router.navigate(['/checkout']);
     }
+  }
+
+  setMainImage(imageUrl: string) {
+    this.mainImage = imageUrl;
   }
 }

@@ -82,6 +82,9 @@
         @for (product of filteredProducts; track product.id) {
         <div class="product-card glass-panel" [routerLink]="['/product', product.id]">
           <div class="badges">
+            @if (product.is_featured) {
+            <span class="badge featured">🌟 Phare</span>
+            }
             @if (product.product_type === 'DIGITAL') {
             <span class="badge digital">Numérique</span>
             }
